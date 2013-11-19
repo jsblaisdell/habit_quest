@@ -1,1 +1,10 @@
 %h1 HabitQuest
+
+%ul
+  - @tasks.each do |task|
+    %li.task
+      = "Name: #{task.name}"
+      %br
+      = "Value: #{task.value}"
+      %br
+      = "Due: #{task.due_date.to_formatted_s(:short)}"
