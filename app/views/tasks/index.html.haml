@@ -8,3 +8,17 @@
       = "Value: #{task.value}"
       %br
       = "Due: #{task.due_date.to_formatted_s(:short)}"
+
+= form_for @new_task do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :value
+    = f.number_field :value
+  .field
+    = f.label :due_date
+    = f.date_field :due_date
+  .actions
+    = f.submit "Commit"
+
