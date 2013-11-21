@@ -33,6 +33,7 @@
         |
         %small= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' }
 
+%h3 Add new task
 = form_for @new_task do |f|
   .field
     = f.label :name
