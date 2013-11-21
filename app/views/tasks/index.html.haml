@@ -58,3 +58,14 @@
       %strong=  link_to "Claim Reward", reward, method: :put, data: { confirm: 'Are you sure?' }
       |
       %small= link_to "Delete", reward, method: :delete, data: { confirm: 'Are you sure?' }
+
+%h3 Add new reward
+= form_for @new_reward do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :value
+    = f.number_field :value
+  .actions
+    = f.submit "Make new reward"
