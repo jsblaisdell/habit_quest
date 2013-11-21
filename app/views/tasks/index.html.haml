@@ -1,15 +1,34 @@
 %h1 HabitQuest
 
+%h3 Incomplete
 %ul
   - @tasks.each do |task|
-    %li.task
-      = "Name: #{task.name}"
-      %br
-      = "Value: #{task.value}"
-      %br
-      = "Due: #{task.due_date.to_formatted_s(:short)}"
-      %br
-      = link_to "delete", task, method: :delete, data: { confirm: 'Are you sure?' }
+    - if task.status == false
+      %li.task
+        = "Name: #{task.name}"
+        %br
+        = "Value: #{task.value}"
+        %br
+        = "Due: #{task.due_date.to_formatted_s(:short)}"
+        %br
+        %strong= link_to "Complete Task", task, method: :put
+        |
+        %small= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' }
+
+%h3 Complete
+%ul
+  - @tasks.each do |task|
+    - if task.status == true
+      %li.task
+        = "Name: #{task.name}"
+        %br
+        = "Value: #{task.value}"
+        %br
+        = "Due: #{task.due_date.to_formatted_s(:short)}"
+        %br
+        %strong=  link_to "Undo Completion", task, method: :put
+        |
+        %small= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' }
 
 = form_for @new_task do |f|
   .field
@@ -23,4 +42,3 @@
     = f.date_field :due_date
   .actions
     = f.submit "Commit"
-

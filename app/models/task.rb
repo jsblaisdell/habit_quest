@@ -10,4 +10,9 @@ class Task < ActiveRecord::Base
   def set_status
     self.status ||= false
   end
+
+  def self.toggle_status(task)
+    task.status = task.status ? false : true
+    task.save
+  end
 end

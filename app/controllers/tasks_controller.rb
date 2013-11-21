@@ -16,6 +16,13 @@ class TasksController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def update
+    @task = Task.find(params[:id])
+    Task.toggle_status(@task)
+
+    redirect_to action: 'index'
+  end
+
   private
 
   def task_params
