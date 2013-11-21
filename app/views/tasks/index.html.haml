@@ -8,6 +8,8 @@
       = "Value: #{task.value}"
       %br
       = "Due: #{task.due_date.to_formatted_s(:short)}"
+      %br
+      = link_to "delete", task, method: :delete, data: { confirm: 'Are you sure?' }
 
 = form_for @new_task do |f|
   .field

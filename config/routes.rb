@@ -1,6 +1,6 @@
 HabitQuest::Application.routes.draw do
   root "tasks#index"
-  post "/tasks" => "tasks#create"
+  resources :tasks
 
   devise_for :users
 end
