@@ -1,71 +1,73 @@
 %h1 HabitQuest
 
 %h3 Points
-= @user.points
+%p= @user.points
 
-%h3 Incomplete
-%ul
-  - @tasks.each do |task|
-    - if task.status == false
-      %li.task
-        = "Name: #{task.name}"
+.tasks
+  %h3 Incomplete
+  %ul
+    - @tasks.each do |task|
+      - if task.status == false
+        %li.task
+          = "Name: #{task.name}"
+          %br
+          = "Value: #{task.value}"
+          %br
+          = "Due: #{task.due_date.to_formatted_s(:short)}"
+          %br
+          %strong= link_to "Complete Task", task, method: :put
+          |
+          %small= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' }
+
+  %h3 Complete
+  %ul
+    - @tasks.each do |task|
+      - if task.status == true
+        %li.task
+          = "Name: #{task.name}"
+          %br
+          = "Value: #{task.value}"
+          %br
+          = "Due: #{task.due_date.to_formatted_s(:short)}"
+          %br
+          %strong=  link_to "Undo Completion", task, method: :put
+          |
+          %small= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' }
+
+  %h3 Add new task
+  = form_for @new_task do |f|
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :value
+      = f.number_field :value
+    .field
+      = f.label :due_date
+      = f.date_field :due_date
+    .actions
+      = f.submit "Commit"
+
+.rewards
+  %h3 Rewards
+  %ul
+    - @rewards.each do |reward|
+      %li.reward
+        = "Name: #{reward.name}"
         %br
-        = "Value: #{task.value}"
+        = "Value: #{reward.value}"
         %br
-        = "Due: #{task.due_date.to_formatted_s(:short)}"
-        %br
-        %strong= link_to "Complete Task", task, method: :put
+        %strong=  link_to "Claim Reward", reward, method: :put, data: { confirm: 'Are you sure?' }
         |
-        %small= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' }
+        %small= link_to "Delete", reward, method: :delete, data: { confirm: 'Are you sure?' }
 
-%h3 Complete
-%ul
-  - @tasks.each do |task|
-    - if task.status == true
-      %li.task
-        = "Name: #{task.name}"
-        %br
-        = "Value: #{task.value}"
-        %br
-        = "Due: #{task.due_date.to_formatted_s(:short)}"
-        %br
-        %strong=  link_to "Undo Completion", task, method: :put
-        |
-        %small= link_to "Delete", task, method: :delete, data: { confirm: 'Are you sure?' }
-
-%h3 Add new task
-= form_for @new_task do |f|
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :value
-    = f.number_field :value
-  .field
-    = f.label :due_date
-    = f.date_field :due_date
-  .actions
-    = f.submit "Commit"
-
-%h3 Rewards
-%ul
-  - @rewards.each do |reward|
-    %li.reward
-      = "Name: #{reward.name}"
-      %br
-      = "Value: #{reward.value}"
-      %br
-      %strong=  link_to "Claim Reward", reward, method: :put, data: { confirm: 'Are you sure?' }
-      |
-      %small= link_to "Delete", reward, method: :delete, data: { confirm: 'Are you sure?' }
-
-%h3 Add new reward
-= form_for @new_reward do |f|
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :value
-    = f.number_field :value
-  .actions
-    = f.submit "Make new reward"
+  %h3 Add new reward
+  = form_for @new_reward do |f|
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :value
+      = f.number_field :value
+    .actions
+      = f.submit "Make new reward"
