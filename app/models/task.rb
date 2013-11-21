@@ -14,5 +14,12 @@ class Task < ActiveRecord::Base
   def self.toggle_status(task)
     task.status = task.status ? false : true
     task.save
+
+    if task.status
+      task.user.points += task.value
+    else
+      task.user.points -= task.value
+    end
+    task.user.save
   end
 end

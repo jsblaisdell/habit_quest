@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks
     @new_task = Task.new
+    @user = current_user
   end
 
   def create
