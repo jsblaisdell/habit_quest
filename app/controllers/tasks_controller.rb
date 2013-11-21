@@ -3,6 +3,7 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks
     @new_task = Task.new
     @user = current_user
+    @rewards = current_user.rewards
   end
 
   def create
