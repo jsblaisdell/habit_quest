@@ -2,12 +2,97 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+body {
+  font-family: helvetica;
+  color: #222;
+}
+
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  @extend %clearfix;
+}
+
+.page-header {
+  background-color: hsl(0, 10, 30);
+  color: white;
+  text-align: center;
+  padding: 1px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+%sidebars {
+  width: 100%;
+  padding: 0 15px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  ul {
+    padding: 0;
+  }
+  li {
+    list-style: none;
+    background-color: white;
+    margin: 10px 0;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1em;
+    padding: 3px 6px;
+    margin-bottom: 15px;
+  }
+  input[type="submit"] {
+    background-color: hsl(0, 10, 30);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    &:active, &:focus {
+      background-color: hsl(0, 10, 20);
+      outline: none;
+    }
+  }
+  @media (min-width: 600px) {
+    width: 45%;
+    margin: 0 2.5%;
+  }
+}
+
+
 .tasks {
-  width: 50%;
+  @extend %sidebars;
   float: left;
+  background-color: hsl(150, 40, 90);
+  border: 1px solid hsl(150, 40, 80);
+  li {
+    border: 1px solid hsl(150, 40, 80);
+  }
+  a {
+    color: hsl(150, 20, 30)
+  }
 }
 
 .rewards {
-  width: 50%;
+  @extend %sidebars;
   float: right;
+  background-color: hsl(210, 40, 90);
+  border: 1px solid hsl(210, 40, 80);
+  li {
+    border: 1px solid hsl(210, 40, 80);
+  }
+  a {
+    color: hsl(210, 20, 30)
+  }
 }
