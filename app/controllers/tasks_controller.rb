@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
   def index
-    @tasks = current_user.tasks
-    @new_task = Task.new
-    @user = current_user
-    @rewards = current_user.rewards
-    @new_reward = Reward.new
+    redirect_to new_user_session_path unless current_user
+    if current_user
+      @tasks = current_user.tasks
+      @new_task = Task.new
+      @user = current_user
+      @rewards = current_user.rewards
+      @new_reward = Reward.new
+    end
   end
 
   def create
